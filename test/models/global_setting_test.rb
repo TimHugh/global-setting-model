@@ -49,4 +49,14 @@ class GlobalSettingTest < ActiveSupport::TestCase
     setting = GlobalSetting.set('a-type-changing-value', "now I'm a string!")
     assert_kind_of String, setting.value
   end
+
+  def test_get_existing_setting
+    setting = global_settings(:string)
+    assert_equal setting.value,
+                 GlobalSetting.get(setting.key)
+  end
+
+  def test_get_non_existing_setting
+    assert_nil GlobalSetting.get('missing-string')
+  end
 end
