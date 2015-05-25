@@ -59,4 +59,14 @@ class GlobalSettingTest < ActiveSupport::TestCase
   def test_get_non_existing_setting
     assert_nil GlobalSetting.get('missing-string')
   end
+
+  def test_unset_existing_setting
+    GlobalSetting.unset('example-string')
+    assert_nil GlobalSetting.find_by(key: 'example-string')
+  end
+
+  def test_unset_non_existing_setting
+    assert_equal false,
+                 GlobalSetting.unset('missing-string')
+  end
 end
