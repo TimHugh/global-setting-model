@@ -4,6 +4,8 @@ class GlobalSetting < ActiveRecord::Base
   validates_presence_of :key, :datatype
   validates :key, uniqueness: true
 
+  after_commit :invalidate_cache
+
   def value
     send(datatype.to_sym)
   end
@@ -18,6 +20,10 @@ class GlobalSetting < ActiveRecord::Base
 
   def datatype_from_object(object)
     GLOBAL_SETTING_DATATYPES[object.class.to_s] || 'string'
+  end
+
+  def invalidate_cache
+    Rails.cache.delete "globalsetting/#{key}"
   end
 
   class << self
