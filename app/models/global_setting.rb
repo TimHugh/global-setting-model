@@ -29,8 +29,10 @@ class GlobalSetting < ActiveRecord::Base
     end
 
     def get(key)
-      setting = find_by(key: key)
-      setting.nil? ? nil : setting.value
+      Rails.cache.fetch "#{key}" do
+        setting = find_by(key: key)
+        setting.nil? ? nil : setting.value
+      end
     end
 
     def unset(key)
