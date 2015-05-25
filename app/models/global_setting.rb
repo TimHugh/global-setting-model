@@ -27,5 +27,10 @@ class GlobalSetting < ActiveRecord::Base
       setting.save!
       setting
     end
+
+    def get(key)
+      setting = find_by(key: key)
+      setting.nil? ? nil : setting.value
+    end
   end
 end
