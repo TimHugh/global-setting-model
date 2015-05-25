@@ -32,5 +32,10 @@ class GlobalSetting < ActiveRecord::Base
       setting = find_by(key: key)
       setting.nil? ? nil : setting.value
     end
+
+    def unset(key)
+      setting = find_by(key: key)
+      setting.nil? ? false : setting.destroy
+    end
   end
 end
