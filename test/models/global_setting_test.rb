@@ -42,4 +42,11 @@ class GlobalSettingTest < ActiveSupport::TestCase
     assert_equal true,
                  setting.boolean
   end
+
+  def test_change_datatype
+    setting = GlobalSetting.set('a-type-changing-value', true)
+    assert_kind_of TrueClass, setting.value
+    setting = GlobalSetting.set('a-type-changing-value', "now I'm a string!")
+    assert_kind_of String, setting.value
+  end
 end
