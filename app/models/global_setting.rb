@@ -17,13 +17,7 @@ class GlobalSetting < ActiveRecord::Base
   protected
 
   def datatype_from_object(object)
-    {
-      'String'      => 'string',
-      'Fixnum'      => 'integer',
-      'Float'       => 'float',
-      'TrueClass'   => 'boolean',
-      'FalseClass'  => 'boolean'
-    }[object.class.to_s] || 'string'
+    GLOBAL_SETTING_DATATYPES[object.class.to_s] || 'string'
   end
 
   class << self
