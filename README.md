@@ -7,12 +7,14 @@ Example ActiveRecord model for storing global configuration settings.
 Super simple key-value pair storage. Right now, it supports string, integer, float, and boolean types, but adding new types is as simple as creating a migration and altering the `GLOBAL_SETTING_DATATYPES` hash (in /config/initializers).
 
 Use example:
+
     GlobalSetting.set('admin-email', 'admin@example.com')
     GlobalSetting.get('admin-email')
     # => 'admin@example.com'
     GlobalSetting.unset('admin-email')
 
 You can also directly alter GlobalSetting instances:
+
     setting = GlobalSetting.last
     setting.value = 42
     setting.save
