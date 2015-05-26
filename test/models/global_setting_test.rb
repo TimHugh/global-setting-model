@@ -43,6 +43,12 @@ class GlobalSettingTest < ActiveSupport::TestCase
                  setting.boolean
   end
 
+  def test_invalid_key
+    assert_raise ActiveRecord::RecordInvalid do
+      GlobalSetting.set(nil, 42)
+    end
+  end
+
   def test_change_datatype
     setting = GlobalSetting.set('a-type-changing-value', true)
     assert_kind_of TrueClass, setting.value
