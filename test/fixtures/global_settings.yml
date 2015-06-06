@@ -1,0 +1,19 @@
+string:
+  key: example-string
+  datatype: 0
+  string: This is an example string
+
+integer:
+  key: example-integer
+  datatype: 1
+  integer: 42
+
+float:
+  key: example-float
+  datatype: 2
+  float: 3.14
+
+boolean:
+  key: example-boolean
+  datatype: 3
+  boolean: true
